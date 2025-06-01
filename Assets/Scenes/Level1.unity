@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4466f8a88fc705409a285473f7ff93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 150
+  moveSpeed: 35
 --- !u!1 &484403497
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,10 +754,10 @@ RectTransform:
   - {fileID: 2143693204}
   m_Father: {fileID: 1813478882}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688, y: -299}
-  m_SizeDelta: {x: 359.059, y: 307.247}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 272, y: 241}
+  m_SizeDelta: {x: 359.05896, y: 307.247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091136580
 MonoBehaviour:
@@ -1107,8 +1107,8 @@ Canvas:
   m_GameObject: {fileID: 1813478881}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 583480424}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
