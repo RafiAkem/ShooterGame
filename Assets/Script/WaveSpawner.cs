@@ -32,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
                 SpawnWave(enemyPrefab, 3);
                 break;
             case 2:
-                SpawnWave(enemyPrefab, 5);
+                SpawnWave(enemyPrefab, 10);
                 break;
             case 3:
                 SpawnWave(bossPrefab, 1);
@@ -45,23 +45,34 @@ public class WaveSpawner : MonoBehaviour
 
 void SpawnWave(GameObject prefab, int count)
 {
-    float camHeight = Camera.main.orthographicSize;       // half vertical size
-    float camWidth = camHeight * Camera.main.aspect;      // half horizontal size
-
-    // Spawn X just outside the right edge of the camera view
+    float camHeight = Camera.main.orthographicSize;
+    float camWidth = camHeight * Camera.main.aspect;
     float spawnX = Camera.main.transform.position.x + camWidth - 10f;
 
-    // Y range inside camera vertical bounds with margin
-    float minY = Camera.main.transform.position.y - camHeight + 1f;
-    float maxY = Camera.main.transform.position.y + camHeight - 1f;
+    // Define grid rows (Y positions)
+    int rows = 7;
+    float spacing = camHeight * 2f / (rows + 1); // full height divided evenly
+    List<float> yPositions = new List<float>();
 
-    for (int i = 0; i < count; i++)
+    for (int i = 1; i <= rows; i++)
     {
-        float spawnY = Random.Range(minY, maxY);
-        Vector3 spawnPos = new Vector3(spawnX, spawnY, 0f);
+        float y = Camera.main.transform.position.y - camHeight + spacing * i;
+        yPositions.Add(y);
+    }
 
-        Debug.Log($"Spawning enemy at {spawnPos} | Camera at {Camera.main.transform.position}");
+    // Shuffle Y positions to randomize row selection
+    for (int i = 0; i < yPositions.Count; i++)
+    {
+        float temp = yPositions[i];
+        int randomIndex = Random.Range(i, yPositions.Count);
+        yPositions[i] = yPositions[randomIndex];
+        yPositions[randomIndex] = temp;
+    }
 
+    // Spawn enemies in available rows
+    for (int i = 0; i < count && i < yPositions.Count; i++)
+    {
+        Vector3 spawnPos = new Vector3(spawnX, yPositions[i], 0f);
         GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
         currentEnemies.Add(enemy);
     }

@@ -782,8 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f98567edbef4749b93a48d36fc8f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave1EnemyPrefab: {fileID: 0}
-  wave2EnemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 5493378459373357740, guid: 7b765395c705abc4f95b732a4a4c5929, type: 3}
   bossPrefab: {fileID: 0}
 --- !u!4 &968213274
 Transform:
