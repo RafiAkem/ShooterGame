@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public FixedJoystick joystick;
     public float moveSpeed = 100f;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public float fireRate = 0.5f;
+    private float nextFireTime;
 
     void Update() {
         float moveX = joystick.Horizontal;
@@ -18,5 +23,14 @@ public class PlayerController : MonoBehaviour
         pos.x = Mathf.Clamp(pos.x, 0.05f, 0.95f);
         pos.y = Mathf.Clamp(pos.y, 0.05f, 0.95f);
         transform.position = Camera.main.ViewportToWorldPoint(pos);
+
+        if (Time.time >= nextFireTime) {
+                Shoot();
+                nextFireTime = Time.time + fireRate;
+            }
+
+        void Shoot() {
+            Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        }
     }
 }
