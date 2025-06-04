@@ -19,9 +19,6 @@ MemoryCaptures/
 *.booproj
 *.svd
 
-# Unity3D generated meta files
-*.meta
-
 # Visual Studio Code
 .vscode/
 
@@ -32,3 +29,19 @@ MemoryCaptures/
 .DS_Store
 .Trashes
 Thumbs.db
+
+# Tambahan yang mungkin berguna (bisa kamu tambahkan jika diperlukan)
+# Crashlytics
+Assets/StreamingAssets/crashlytics-buildid.txt
+
+# Keystore for Android
+*.keystore
+
+# macOS specific build folders
+*.app/
+*.ipa/
+
+# External packages/dependencies (jika kamu menggunakan sistem paket terpisah)
+# Packages/
+# Local Asset Store packages
+# Assets/AssetStoreTools/
