@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: bullet enemy_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 43
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f722d8abd70f04584454ed65ca5936
+      internalID: 981794589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet enemy_6
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 43
+        width: 200
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 430618191a297a245b471f5e49e82753
+      internalID: 460688508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +161,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bullet enemy_0: 981794589
+      bullet enemy_1: 1651005724
+      bullet enemy_2: 1493279611
+      bullet enemy_3: 661683668
+      bullet enemy_4: 1522174446
+      bullet enemy_5: 186296841
+      bullet enemy_6: 460688508
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
