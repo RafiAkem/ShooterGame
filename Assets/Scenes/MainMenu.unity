@@ -130,6 +130,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 811771934}
     m_Modifications:
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ff38ac6aae5286f40b0fea616a915e07, type: 3}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1909447996213649107, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
       propertyPath: m_Name
       value: SettingBtn
@@ -219,7 +239,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9050109395495454664, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
@@ -236,6 +257,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 811771934}
     m_Modifications:
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 84a23b9c42659a54eb122f200a7c753f, type: 3}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1909447996213649107, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
       propertyPath: m_Name
       value: ExitBtn
@@ -325,7 +354,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9050109395495454664, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
@@ -868,6 +898,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 811771934}
     m_Modifications:
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 23148407f96b38440bd8c81c5444b314, type: 3}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1909447996213649107, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
       propertyPath: m_Name
       value: SelectingLevelBtn
@@ -957,7 +1003,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9050109395495454664, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}

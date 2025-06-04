@@ -130,6 +130,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 709363550}
     m_Modifications:
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e942f2c88d2a784ab7d7e25e7372f52, type: 3}
+    - target: {fileID: 643378974985214241, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1909447996213649107, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
       propertyPath: m_Name
       value: CreditBtn
@@ -219,7 +231,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9050109395495454664, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 215b6fe7a5b727e42a0d32eb549291e3, type: 3}
@@ -307,7 +320,7 @@ GameObject:
   - component: {fileID: 709363550}
   - component: {fileID: 709363551}
   m_Layer: 5
-  m_Name: grid
+  m_Name: ButtonGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +367,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 700, y: 250}
+  m_CellSize: {x: 300, y: 300}
   m_Spacing: {x: 0, y: 30}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -569,7 +582,7 @@ GameObject:
   - component: {fileID: 1615158345}
   - component: {fileID: 1615158346}
   m_Layer: 5
-  m_Name: grid2
+  m_Name: BackButtonGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,6 +746,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 709363550}
     m_Modifications:
+    - target: {fileID: 1131076808786752322, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 38e4ef6b8eff15e44944d2f19b0ba5f3, type: 3}
+    - target: {fileID: 1131076808786752322, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2098784406641390768, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
       propertyPath: m_Name
       value: SoundBtn
@@ -818,7 +839,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8847228086831738283, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
