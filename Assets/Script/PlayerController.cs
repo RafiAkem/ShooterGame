@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public float fireRate = 20.0f; // Delay between shots
     private float nextFireTime;
+    public bool canShoot = true;
 
     void Update()
     {
@@ -27,15 +28,38 @@ public class PlayerController : MonoBehaviour
         transform.position = Camera.main.ViewportToWorldPoint(pos);
 
         // Shooting with cooldown
-        if (Time.time >= nextFireTime)
-        {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
-        }
+if (canShoot && Time.time >= nextFireTime)
+{
+    Shoot();
+    nextFireTime = Time.time + fireRate;
+}
     }
 
     void Shoot()
     {
         Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
     }
+
+void OnTriggerEnter2D(Collider2D other)
+{
+    Debug.Log("Player collided with: " + other.gameObject.name + ", tag: " + other.tag);
+
+    if (other.CompareTag("EnemyBullet"))
+    {
+        Debug.Log("Hit by enemy bullet!");
+
+        Destroy(other.gameObject);
+
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeEnemyBulletHit();
+        }
+        else
+        {
+            Debug.LogWarning("PlayerHealth component not found on Player!");
+        }
+    }
+}
+
 }

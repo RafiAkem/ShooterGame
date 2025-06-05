@@ -17,8 +17,10 @@ public class Enemy : MonoBehaviour
 
     public GameObject enemyBulletPrefab;
     public Transform firePoint; // assign an empty child transform where bullets come from
-    public float fireRate = 2f; // seconds between shots
+    public float fireRate = 6f; // seconds between shots
     private float nextFireTime = 0f;
+
+    public GameObject explosionPrefab;
 
     void Start()
     {
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour
         float topLimit = maxY - transform.position.y;
         float bottomLimit = transform.position.y - minY;
         moveRange = Mathf.Min(topLimit, bottomLimit);
+
+        nextFireTime = Time.time + Random.Range(0f, fireRate);
     }
 
     void Update()
@@ -83,8 +87,10 @@ void Shoot()
         // Start flashing coroutine
         StartCoroutine(FlashOnHit());
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0) {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
     }
 
     private IEnumerator FlashOnHit()
