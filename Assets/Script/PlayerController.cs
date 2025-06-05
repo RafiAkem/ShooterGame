@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 100f;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireRate = 0.5f; // Delay between shots
+    public float fireRate = 20.0f; // Delay between shots
     private float nextFireTime;
 
     void Update()

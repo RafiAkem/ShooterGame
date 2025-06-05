@@ -32,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
                 SpawnWave(enemyPrefab, 3);
                 break;
             case 2:
-                SpawnWave(enemyPrefab, 10);
+                SpawnWave(enemyPrefab, 5);
                 break;
             case 3:
                 SpawnWave(bossPrefab, 1);
@@ -43,41 +43,55 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-void SpawnWave(GameObject prefab, int count)
+void SpawnWave(GameObject prefab, int totalColumns)
 {
     float camHeight = Camera.main.orthographicSize;
     float camWidth = camHeight * Camera.main.aspect;
-    float spawnX = Camera.main.transform.position.x + camWidth - 10f;
 
-    // Define grid rows (Y positions)
-    int rows = 7;
-    float spacing = camHeight * 2f / (rows + 1); // full height divided evenly
-    List<float> yPositions = new List<float>();
+    SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
+    float enemyWidth = sr != null ? sr.bounds.size.x : 1f;
+    float enemyHeight = sr != null ? sr.bounds.size.y : 1f;
 
-    for (int i = 1; i <= rows; i++)
+    float spacingX = enemyWidth + 1f;
+    float spacingY = enemyHeight + 0.5f;
+
+    // Calculate total width of the pyramid
+    float pyramidWidth = totalColumns * spacingX;
+
+    // We want the left edge of the pyramid near the right edge of the camera
+    float leftEdge = Camera.main.transform.position.x + camWidth - pyramidWidth + (spacingX / 2f);
+
+    float centerY = Camera.main.transform.position.y;
+
+    for (int col = 0; col < totalColumns; col++)
     {
-        float y = Camera.main.transform.position.y - camHeight + spacing * i;
-        yPositions.Add(y);
-    }
+        int enemiesInColumn = col + 1;  // 1, 2, 3, ...
 
-    // Shuffle Y positions to randomize row selection
-    for (int i = 0; i < yPositions.Count; i++)
-    {
-        float temp = yPositions[i];
-        int randomIndex = Random.Range(i, yPositions.Count);
-        yPositions[i] = yPositions[randomIndex];
-        yPositions[randomIndex] = temp;
-    }
+        float columnHeight = (enemiesInColumn - 1) * spacingY;
+        float startY = centerY - columnHeight / 2f;
 
-    // Spawn enemies in available rows
-    for (int i = 0; i < count && i < yPositions.Count; i++)
-    {
-        Vector3 spawnPos = new Vector3(spawnX, yPositions[i], 0f);
-        GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
-        currentEnemies.Add(enemy);
+        // Spawn columns from left to right
+        float x = leftEdge + col * spacingX;
+
+        for (int row = 0; row < enemiesInColumn; row++)
+        {
+            float y = startY + row * spacingY;
+            Vector3 spawnPos = new Vector3(x, y, 0f);
+
+            GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
+            currentEnemies.Add(enemy);
+        }
     }
 
     waveInProgress = false;
 }
+
+
+
+
+
+
+
+
 
 }
