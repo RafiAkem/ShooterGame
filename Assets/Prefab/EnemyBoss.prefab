@@ -211,8 +211,8 @@ MonoBehaviour:
   missileSpawnPoints:
   - {fileID: 7673327157184281010}
   - {fileID: 4887611104597488828}
+  StageCompleteUI: {fileID: 8168736172255170250, guid: a7e2edfde33916944aa2c29d6a9e3798, type: 3}
   retreatSpeed: 6
-  levelCompleteText: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 50a8ca87c93784649b68c31e88c245f7, type: 3}
 --- !u!82 &-3367165479685200709
 AudioSource:

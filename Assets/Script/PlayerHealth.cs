@@ -76,12 +76,19 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player Dead!");
+        Time.timeScale = 0f;
+
+        //hidden player object
+        gameObject.SetActive(false);
+
 
         // Disable all enemies
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.SetActive(false);
         }
+
+        //if there's boss
 
         // Disable all bullets
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("EnemyBullet"))

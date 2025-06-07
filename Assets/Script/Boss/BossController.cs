@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+// Hapus using TMPro; jika Anda tidak menggunakan TextMeshPro sama sekali di script ini
+// using TMPro;
 
 public class BossController : MonoBehaviour
 {
@@ -38,7 +39,6 @@ public class BossController : MonoBehaviour
     private bool isRetreating = false;
     public float retreatSpeed = 6f;
     private bool isPhase3FinalAttack = false;
-    public TextMeshProUGUI levelCompleteText;
     public AudioClip hitSound;
     private AudioSource audioSource;
 
@@ -121,13 +121,13 @@ public class BossController : MonoBehaviour
 
     void UpdatePhase()
     {
-        if (currentHealth <= 100 && currentPhase == 1)
+        if (currentHealth <= (maxHealth / 2) && currentPhase == 1) // Contoh: jika maxHealth 150, ini 75
         {
             currentPhase = 2;
             Debug.Log("Phase 2 started!");
             StartCoroutine(TriggerExplosionsDelayed());
         }
-        else if (currentHealth <= 50 && currentPhase == 2)
+        else if (currentHealth <= (maxHealth / 4) && currentPhase == 2) // Contoh: jika maxHealth 150, ini 37.5
         {
             currentPhase = 3;
             Debug.Log("Phase 3 started!");
@@ -137,14 +137,14 @@ public class BossController : MonoBehaviour
         }
     }
 
-void Die()
-{
-    Debug.Log("Boss defeated!");
-    StopAllCoroutines();
-    isInvincible = true;
+    void Die()
+    {
+        Debug.Log("Boss defeated!");
+        StopAllCoroutines();
+        isInvincible = true;
 
-    StartCoroutine(BossDeathSequence());
-}
+        StartCoroutine(BossDeathSequence());
+    }
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -156,25 +156,25 @@ void Die()
         }
     }
 
-IEnumerator FireLoop()
-{
-    while (true)
+    IEnumerator FireLoop()
     {
-        if (currentPhase != 3)
+        while (true)
         {
-            Shoot();
-        }
-        else if (isPhase3FinalAttack)
-        {
-            // Fire everything!
-            FireStraight();
-            FireSpreadPhase2();
-            FireWave();
-        }
+            if (currentPhase != 3)
+            {
+                Shoot();
+            }
+            else if (isPhase3FinalAttack)
+            {
+                // Fire everything!
+                FireStraight();
+                FireSpreadPhase2();
+                FireWave();
+            }
 
-        yield return new WaitForSeconds(attackInterval);
+            yield return new WaitForSeconds(attackInterval);
+        }
     }
-}
 
 
     void Shoot()
@@ -260,61 +260,61 @@ IEnumerator FireLoop()
         }
     }
 
-IEnumerator EnterPhase3()
-{
-    isRetreating = true;
-
-    float targetX = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 0, 0)).x;
-
-    while (transform.position.x < targetX)
+    IEnumerator EnterPhase3()
     {
-        transform.position += Vector3.right * retreatSpeed * Time.deltaTime;
-        yield return null;
-    }
+        isRetreating = true;
 
-    yield return new WaitForSeconds(1f);
+        float targetX = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 0, 0)).x;
 
-    SpawnPhase3Enemies();
-    StartCoroutine(FireMissileRoutine());
-}
-
-
-IEnumerator FireMissileRoutine()
-{
-    Debug.Log("Missile coroutine started");
-
-    while (currentPhase == 3)
-    {
-        yield return new WaitForSeconds(2f);
-
-        if (homingMissilePrefab != null && missileSpawnPoints != null)
+        while (transform.position.x < targetX)
         {
-            foreach (Transform point in missileSpawnPoints)
-            {
-                Instantiate(homingMissilePrefab, point.position, Quaternion.identity);
-                Debug.Log("Missile spawned at: " + point.position);
-            }
+            transform.position += Vector3.right * retreatSpeed * Time.deltaTime;
+            yield return null;
         }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+
+        SpawnPhase3Enemies();
+        StartCoroutine(FireMissileRoutine());
     }
-}
+
+
+    IEnumerator FireMissileRoutine()
+    {
+        Debug.Log("Missile coroutine started");
+
+        while (currentPhase == 3)
+        {
+            yield return new WaitForSeconds(2f);
+
+            if (homingMissilePrefab != null && missileSpawnPoints != null)
+            {
+                foreach (Transform point in missileSpawnPoints)
+                {
+                    Instantiate(homingMissilePrefab, point.position, Quaternion.identity);
+                    Debug.Log("Missile spawned at: " + point.position);
+                }
+            }
+
+            yield return new WaitForSeconds(3f);
+        }
+    }
 
     IEnumerator LoopExplosionsWhileRetreating()
-{
-    while (isRetreating)
     {
-        if (explosionEffect != null && explosionPoints != null)
+        while (isRetreating)
         {
-            foreach (Transform point in explosionPoints)
+            if (explosionEffect != null && explosionPoints != null)
             {
-                Instantiate(explosionEffect, point.position, Quaternion.identity);
+                foreach (Transform point in explosionPoints)
+                {
+                    Instantiate(explosionEffect, point.position, Quaternion.identity);
+                }
             }
-        }
 
-        yield return new WaitForSeconds(0.4f); // Adjust timing for pacing
+            yield return new WaitForSeconds(0.4f); // Adjust timing for pacing
+        }
     }
-}
 
     void SpawnPhase3Enemies()
     {
@@ -354,81 +354,89 @@ IEnumerator FireMissileRoutine()
         StartCoroutine(WaitForEnemiesThenReturn());
     }
 
-IEnumerator WaitForEnemiesThenReturn()
-{
-    // Wait until all phase3Enemies are null
-    while (phase3Enemies.Exists(e => e != null))
+    IEnumerator WaitForEnemiesThenReturn()
     {
-        yield return null;
-    }
+        // Wait until all phase3Enemies are null
+        while (phase3Enemies.Exists(e => e != null))
+        {
+            yield return null;
+        }
 
-    StartCoroutine(BossReturn());
-}
+        StartCoroutine(BossReturn());
+    }
 
     IEnumerator BossReturn()
-{
-    float returnSpeed = retreatSpeed;
-
-    // Move boss back to original stopX position
-    while (transform.position.x > stopX)
     {
-        transform.position += Vector3.left * returnSpeed * Time.deltaTime;
-        yield return null;
-    }
+        float returnSpeed = retreatSpeed;
 
-    isRetreating = false;
-    isInvincible = false;
-
-    isPhase3FinalAttack = true;
-
-    Debug.Log("Boss returned from retreat.");
-}
-
-IEnumerator BossDeathSequence()
-{
-    float explosionDuration = 6f;
-    float timer = 0f;
-
-    // 1. Continuous random explosions for 3 seconds
-    while (timer < explosionDuration)
-    {
-        if (explosionEffect != null)
+        // Move boss back to original stopX position
+        while (transform.position.x > stopX)
         {
-            Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
-            Instantiate(explosionEffect, transform.position + randomOffset, Quaternion.identity);
+            transform.position += Vector3.left * returnSpeed * Time.deltaTime;
+            yield return null;
         }
 
-        timer += 0.8f;
-        yield return new WaitForSeconds(0.2f);
+        isRetreating = false;
+        isInvincible = false;
+
+        isPhase3FinalAttack = true;
+
+        Debug.Log("Boss returned from retreat.");
     }
 
-    // 2. Final big explosion
-    Instantiate(explosionEffect, transform.position, Quaternion.identity); // You could swap to a 'big' prefab
-    yield return new WaitForSeconds(0.5f);
-
-    // 3. Boss disappears
-    gameObject.SetActive(false);
-
-    // 4. Trigger player ship to fly away
-    GameObject player = GameObject.FindGameObjectWithTag("PlayerShip");
-    if (player != null)
+    IEnumerator BossDeathSequence()
     {
-        PlayerExit playerExit = player.GetComponent<PlayerExit>();
-        if (playerExit != null)
+        float explosionDuration = 6f;
+        float timer = 0f;
+
+       
+        // Stop the boss from firing missiles
+            //foreach (Transform point in missileSpawnPoints)
+            //{
+            //    foreach (Transform child in point)
+            //    {
+            //        Destroy(child.gameObject); // Destroy any existing missiles
+            //    }
+            //}
+
+        
+
+        //disappear the boss firemissile
+        StopCoroutine(FireMissileRoutine());
+
+        // 1. Continuous random explosions for 3 seconds
+        while (timer < explosionDuration)
         {
-            playerExit.StartExit();
+            if (explosionEffect != null)
+            {
+                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+                Instantiate(explosionEffect, transform.position + randomOffset, Quaternion.identity);
+            }
+
+            timer += 0.8f;
+            yield return new WaitForSeconds(0.2f);
         }
+
+        // 2. Final big explosion
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+
+        // 3. Boss disappears
+        gameObject.SetActive(false);
+
+        // 4. Trigger player ship to fly away
+        GameObject player = GameObject.FindGameObjectWithTag("PlayerShip");
+        if (player != null)
+        {
+            PlayerExit playerExit = player.GetComponent<PlayerExit>();
+            if (playerExit != null)
+            {
+                playerExit.StartExit();
+            }
+        }
+
+        //stop all coroutines related to the boss
+        StopAllCoroutines();
+        Destroy(gameObject);
     }
-
-    // 5. Show "LEVEL COMPLETE" after a delay
-    yield return new WaitForSeconds(2f);
-
-    if (levelCompleteText != null)
-    {
-        levelCompleteText.gameObject.SetActive(true);
-        levelCompleteText.text = "LEVEL COMPLETE";
-    }
-}
-
-
 }

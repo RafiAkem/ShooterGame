@@ -40,6 +40,17 @@ public class Pause : MonoBehaviour
 
     public void Play()
     {
+        GameObject[] playerBullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject bullet in playerBullets)
+        {
+            bullet.SetActive(true);
+        }
+        foreach (GameObject bullet in enemyBullets)
+        {
+            bullet.SetActive(true);
+        }
+
         PauseMenuCanvas.SetActive(false);
         SettingsMenuCanvas.SetActive(false); // Sembunyikan menu pengaturan saat melanjutkan
         Player.SetActive(true);
@@ -52,6 +63,18 @@ public class Pause : MonoBehaviour
 
     void Stop()
     {
+        GameObject[] playerBullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject bullet in playerBullets)
+        {
+            bullet.SetActive(false);
+        }
+        foreach (GameObject bullet in enemyBullets)
+        {
+            bullet.SetActive(false);
+        }
+
+
         PauseMenuCanvas.SetActive(true);
         SettingsMenuCanvas.SetActive(false); // Pastikan menu pengaturan tersembunyi saat menjeda
         Player.SetActive(false);

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +8,8 @@ public class WaveSpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject bossPrefab;
+    public GameObject StageCompleteUI;
+  
 
     public Transform enemyContainer;
 
@@ -29,6 +31,11 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
+        //StageCompleteUI.SetActive(false);
+        if (StageCompleteUI != null) { 
+        StageCompleteUI.SetActive(false);
+        }
+
         currentWave = 0;
         currentEnemies.Clear();
         audioSource = GetComponent<AudioSource>();
@@ -63,7 +70,7 @@ public class WaveSpawner : MonoBehaviour
         {
             if (waveAnnouncementText != null)
             {
-                waveAnnouncementText.text = "WAVE " + wave;
+                waveAnnouncementText.text = "WAVE " + wave +" INCOMING";
                 waveAnnouncementText.gameObject.SetActive(true);
                 yield return StartCoroutine(FlashText(waveAnnouncementText, waveAnnouncementDuration, 0.3f));
                 waveAnnouncementText.gameObject.SetActive(false);
@@ -81,6 +88,14 @@ public class WaveSpawner : MonoBehaviour
             case 3:
                 yield return StartCoroutine(StartBossWave(bossPrefab));
                 break;
+            case 4:
+                //delay 4 detik
+                yield return new WaitForSeconds(4);
+                if (StageCompleteUI != null)
+                {
+                    StageCompleteUI.SetActive(true);
+                }
+                break;
             default:
                 Debug.Log("All waves complete!");
                 waveInProgress = false;
@@ -88,6 +103,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveInProgress = false;
+        
     }
 
     IEnumerator FlashText(TMP_Text text, float duration, float flashInterval)
@@ -143,7 +159,7 @@ public class WaveSpawner : MonoBehaviour
     {
         if (waveAnnouncementText != null)
         {
-            waveAnnouncementText.text = "BOSS INCOMING!";
+            waveAnnouncementText.text = "BOSS INCOMING !";
             waveAnnouncementText.gameObject.SetActive(true);
 
         if (audioSource != null && bossIncomingClip != null)
@@ -181,6 +197,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveInProgress = false;
+
     }
 
     IEnumerator BossEntrance(GameObject bossInstance)
