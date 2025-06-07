@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Script\\Pause.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\WaveSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Script\\WaveSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\Navigation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Script\\Navigation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -46,11 +50,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "WaveSpawner.cs",
+              "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\WaveSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\WaveSpawner.cs",
+              "ToolTip": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\WaveSpawner.cs",
+              "RelativeToolTip": "Assets\\Script\\WaveSpawner.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAqwKAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T03:50:28.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Navigation.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\Navigation.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Navigation.cs",
@@ -68,14 +85,14 @@
               "RelativeDocumentMoniker": "Assets\\Script\\Pause.cs",
               "ToolTip": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\Pause.cs",
               "RelativeToolTip": "Assets\\Script\\Pause.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAIwFIAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAC8AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T08:23:35.954Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\PlayerController.cs",
@@ -87,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "AspectRatioEnforcer.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\AspectRatioEnforcer.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\AspectRatioEnforcer.cs",
@@ -99,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "FileIOProvider.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Library\\PackageCache\\com.unity.ide.visualstudio@2.0.22\\Editor\\ProjectGeneration\\FileIOProvider.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.ide.visualstudio@2.0.22\\Editor\\ProjectGeneration\\FileIOProvider.cs",
@@ -111,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "VirtualJoystick.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\VirtualJoystick.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\VirtualJoystick.cs",
@@ -123,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "SpaceshipController.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\SpaceshipController.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\SpaceshipController.cs",
@@ -135,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\PlayerMovement.cs",
@@ -147,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Joystick.cs",
               "DocumentMoniker": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\Joystick.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Joystick.cs",

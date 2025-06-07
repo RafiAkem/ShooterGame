@@ -11,6 +11,7 @@ public class Pause : MonoBehaviour
     public GameObject Player;
     public GameObject Enemy;
     public GameObject UI;
+    public GameObject Clone;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class Pause : MonoBehaviour
         Player.SetActive(true);
         Enemy.SetActive(true);
         UI.SetActive(true); // Tampilkan UI saat melanjutkan game
+        Clone.SetActive(true);
         Time.timeScale = 1f;
         Paused = false;
     }
@@ -55,6 +57,10 @@ public class Pause : MonoBehaviour
         Player.SetActive(false);
         Enemy.SetActive(false);
         UI.SetActive(false); // Sembunyikan UI saat game dijeda
+        if (Clone != null)
+        {
+            Clone.SetActive(false); // Pastikan Clone juga dinonaktifkan saat menjeda
+        }
         Time.timeScale = 0f;
         Paused = true;
     }

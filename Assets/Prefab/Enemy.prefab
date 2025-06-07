@@ -153,7 +153,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 27, y: 2, z: 0, w: 7}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 201, y: 118}
     newSize: {x: 201, y: 118}
