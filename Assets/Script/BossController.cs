@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public int maxHealth = 300;
+    public int maxHealth = 150;
     private int currentHealth;
 
     public float moveSpeed = 3f;       // Leftward speed
-    public float verticalAmplitude = 1f;  // How far it moves up/down
-    public float verticalFrequency = 1f;  // Speed of vertical oscillation
+    public float verticalAmplitude = 2f;  // How far it moves up/down
+    public float verticalFrequency = 2f;  // Speed of vertical oscillation
 
     private Vector3 startPosition;
     public GameObject bulletPrefab;
@@ -17,14 +17,30 @@ public class BossController : MonoBehaviour
     public float attackInterval = 2f;
     public float bulletSpeed = 5f;
     private int currentPhase = 1;
+    private float stopX;
+    private float bossHalfWidth;
+
+    public GameObject explosionEffect;
+    public Transform[] explosionPoints;
+
 
 
     void Start()
     {
-        currentHealth = maxHealth;
-        startPosition = transform.position;
+    currentHealth = maxHealth;
+    startPosition = transform.position;
 
-        StartCoroutine(FireLoop());
+    // Calculate boss half width based on SpriteRenderer bounds
+    SpriteRenderer sr = GetComponent<SpriteRenderer>();
+    if (sr != null)
+    {
+        bossHalfWidth = sr.bounds.size.x / 2f;
+    }
+
+    float screenRightX = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
+    stopX = screenRightX - bossHalfWidth - 0.5f; // 0.5f is extra padding
+
+    StartCoroutine(FireLoop());
     }
 
     void Update()
@@ -34,16 +50,13 @@ public class BossController : MonoBehaviour
 
 void MoveLeftWithVerticalOscillation()
 {
-    float stopX = Camera.main.transform.position.x + 2f; // Stop 4 units from left edge
     float currentX = transform.position.x;
 
-    // Move left only if not yet reached stopX
     if (currentX > stopX)
     {
         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
     }
 
-    // Always oscillate vertically
     float newY = startPosition.y + Mathf.Sin(Time.time * verticalFrequency) * verticalAmplitude;
     transform.position = new Vector3(transform.position.x, newY, transform.position.z);
 }
@@ -62,19 +75,34 @@ void MoveLeftWithVerticalOscillation()
     }
     }
 
-    void UpdatePhase()
+IEnumerator TriggerExplosionsDelayed()
 {
-    if (currentHealth <= 200 && currentPhase == 1)
+    if (explosionEffect == null || explosionPoints == null) yield break;
+
+    foreach (Transform point in explosionPoints)
+    {
+        Instantiate(explosionEffect, point.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.3f); // Delay between explosions
+    }
+}
+
+
+void UpdatePhase()
+{
+    if (currentHealth <= 100 && currentPhase == 1)
     {
         currentPhase = 2;
         Debug.Log("Phase 2 started!");
+        StartCoroutine(TriggerExplosionsDelayed());
     }
-    else if (currentHealth <= 100 && currentPhase == 2)
+    else if (currentHealth <= 50 && currentPhase == 2)
     {
         currentPhase = 3;
         Debug.Log("Phase 3 started!");
+        StartCoroutine(TriggerExplosionsDelayed());
     }
 }
+
 
     void Die()
     {
