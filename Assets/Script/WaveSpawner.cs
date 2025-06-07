@@ -106,9 +106,9 @@ public class WaveSpawner : MonoBehaviour
                 float y = startY + row * spacingY;
                 Vector3 spawnPos = new Vector3(x, y, 0f);
 
-                GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
-                enemy.transform.localScale = Vector3.one;
-                currentEnemies.Add(enemy);
+                // GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
+                // enemy.transform.localScale = Vector3.one;
+                // currentEnemies.Add(enemy);
             }
 
             yield return new WaitForSeconds(timeBetweenColumns);
@@ -132,7 +132,7 @@ public class WaveSpawner : MonoBehaviour
 
         Vector3 bossSpawnPos = new Vector3(Camera.main.transform.position.x + camWidth + 2f, Camera.main.transform.position.y, 0f);
         GameObject bossInstance = Instantiate(boss, bossSpawnPos, Quaternion.identity, enemyContainer);
-        bossInstance.transform.localScale = Vector3.one;
+        // bossInstance.transform.localScale = Vector3.one;
         currentEnemies.Add(bossInstance);
 
         yield return StartCoroutine(BossEntrance(bossInstance));
