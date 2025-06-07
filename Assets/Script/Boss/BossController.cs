@@ -39,11 +39,14 @@ public class BossController : MonoBehaviour
     public float retreatSpeed = 6f;
     private bool isPhase3FinalAttack = false;
     public TextMeshProUGUI levelCompleteText;
+    public AudioClip hitSound;
+    private AudioSource audioSource;
 
     private List<GameObject> phase3Enemies = new List<GameObject>();
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         startPosition = transform.position;
 
@@ -83,6 +86,11 @@ public class BossController : MonoBehaviour
 
         currentHealth -= damage;
         Debug.Log("Boss took damage: " + damage + ", current HP: " + currentHealth);
+
+        if (hitSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
 
         if (spriteRenderer != null)
             StartCoroutine(FlashOnHit());

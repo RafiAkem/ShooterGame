@@ -22,8 +22,13 @@ public class Enemy : MonoBehaviour
 
     public GameObject explosionPrefab;
 
+    public AudioClip hitSound;
+    private AudioSource audioSource;
+
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         startY = transform.position.y;
         currentHealth = maxHealth;
 
@@ -86,6 +91,11 @@ void Shoot()
 
         // Start flashing coroutine
         StartCoroutine(FlashOnHit());
+
+        if (hitSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
 
         if (currentHealth <= 0) {
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);

@@ -22,12 +22,26 @@ public class WaveSpawner : MonoBehaviour
 
     public AudioClip bossIncomingClip;
     private AudioSource audioSource;
+    public AudioClip normalWaveMusicClip;
+    public AudioClip bossFightMusicClip;
+
+    private AudioSource musicAudioSource;
 
     void Start()
     {
         currentWave = 0;
         currentEnemies.Clear();
         audioSource = GetComponent<AudioSource>();
+
+        musicAudioSource = gameObject.AddComponent<AudioSource>();
+        musicAudioSource.loop = true;
+
+        if (normalWaveMusicClip != null)
+    {
+        musicAudioSource.clip = normalWaveMusicClip;
+        musicAudioSource.Play();
+    }
+
         StartCoroutine(StartWave(currentWave));
     }
     void Update()
@@ -116,9 +130,9 @@ public class WaveSpawner : MonoBehaviour
                 float y = startY + row * spacingY;
                 Vector3 spawnPos = new Vector3(x, y, 0f);
 
-                // GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
-                // enemy.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
-                // currentEnemies.Add(enemy);
+                GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
+                enemy.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+                currentEnemies.Add(enemy);
             }
 
             yield return new WaitForSeconds(timeBetweenColumns);
@@ -135,6 +149,14 @@ public class WaveSpawner : MonoBehaviour
         if (audioSource != null && bossIncomingClip != null)
         {
             audioSource.PlayOneShot(bossIncomingClip);
+        }
+
+        // Switch music
+        if (musicAudioSource != null && bossFightMusicClip != null)
+        {
+            musicAudioSource.Stop();
+            musicAudioSource.clip = bossFightMusicClip;
+            musicAudioSource.Play();
         }
 
             yield return StartCoroutine(FlashText(waveAnnouncementText, 3f, 0.5f));
