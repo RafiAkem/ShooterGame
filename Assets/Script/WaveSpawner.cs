@@ -9,6 +9,8 @@ public class WaveSpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject bossPrefab;
 
+    public Transform enemyContainer;  // Assign this in Inspector to an empty GameObject
+
     public TMP_Text waveAnnouncementText;
     public float waveAnnouncementDuration = 2f;
     public float timeBetweenColumns = 0.5f;
@@ -104,7 +106,7 @@ public class WaveSpawner : MonoBehaviour
                 float y = startY + row * spacingY;
                 Vector3 spawnPos = new Vector3(x, y, 0f);
 
-                GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
+                GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
                 currentEnemies.Add(enemy);
             }
 
@@ -128,11 +130,11 @@ public class WaveSpawner : MonoBehaviour
         float camWidth = camHeight * Camera.main.aspect;
 
         Vector3 bossSpawnPos = new Vector3(Camera.main.transform.position.x + camWidth + 2f, Camera.main.transform.position.y, 0f);
-        GameObject bossInstance = Instantiate(boss, bossSpawnPos, Quaternion.identity);
+        GameObject bossInstance = Instantiate(boss, bossSpawnPos, Quaternion.identity, enemyContainer);
         currentEnemies.Add(bossInstance);
 
         yield return StartCoroutine(BossEntrance(bossInstance));
-        
+
         while (bossInstance != null)
         {
             yield return null;
