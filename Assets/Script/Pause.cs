@@ -8,6 +8,9 @@ public class Pause : MonoBehaviour
     public static bool Paused = false;
     public GameObject PauseMenuCanvas;
     public GameObject SettingsMenuCanvas;
+    public GameObject Player;
+    public GameObject Enemy;
+    public GameObject UI;
 
     void Start()
     {
@@ -38,6 +41,9 @@ public class Pause : MonoBehaviour
     {
         PauseMenuCanvas.SetActive(false);
         SettingsMenuCanvas.SetActive(false); // Sembunyikan menu pengaturan saat melanjutkan
+        Player.SetActive(true);
+        Enemy.SetActive(true);
+        UI.SetActive(true); // Tampilkan UI saat melanjutkan game
         Time.timeScale = 1f;
         Paused = false;
     }
@@ -46,6 +52,9 @@ public class Pause : MonoBehaviour
     {
         PauseMenuCanvas.SetActive(true);
         SettingsMenuCanvas.SetActive(false); // Pastikan menu pengaturan tersembunyi saat menjeda
+        Player.SetActive(false);
+        Enemy.SetActive(false);
+        UI.SetActive(false); // Sembunyikan UI saat game dijeda
         Time.timeScale = 0f;
         Paused = true;
     }
@@ -71,11 +80,19 @@ public class Pause : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public void BackButton()
+    public void ExitButon()
     {
-        // Memastikan game tidak dijeda saat kembali ke SelectLevel
+        // game pindah ke halaman SelectingLevel
+        Time.timeScale = 1f; // Pastikan game tidak dijeda saat keluar
+        Paused = false;
+        SceneManager.LoadScene("SelectingLevel");
+    }
+
+    public void restart()
+    {
+        // Memastikan game tidak dijeda saat restart
         Time.timeScale = 1f;
         Paused = false;
-        SceneManager.LoadScene("SelectLevel");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

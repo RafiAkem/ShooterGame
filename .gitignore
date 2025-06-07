@@ -22,6 +22,9 @@ MemoryCaptures/
 # Visual Studio Code
 .vscode/
 
+# Visual Studio temporary files (Crucial for Unity/VS projects)
+.vs/
+
 # Rider
 .idea/
 

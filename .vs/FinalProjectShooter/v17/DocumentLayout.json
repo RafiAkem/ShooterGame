@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "Assets\\Script\\Pause.cs",
               "ToolTip": "C:\\daffa\\kuliah\\Semester6\\PemrogramanGame\\Tubes2\\FinalProjectShooter\\Assets\\Script\\Pause.cs",
               "RelativeToolTip": "Assets\\Script\\Pause.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAC0AAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T08:23:35.954Z",
               "EditorCaption": ""
@@ -67,8 +67,7 @@
               "RelativeToolTip": "Assets\\Script\\PlayerController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAswBYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T08:08:39.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T08:08:39.284Z"
             },
             {
               "$type": "Document",
@@ -116,8 +115,7 @@
               "RelativeToolTip": "Assets\\Script\\SpaceshipController.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAIwBMAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T08:00:47.933Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T08:00:47.933Z"
             },
             {
               "$type": "Document",
