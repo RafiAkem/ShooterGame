@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 10;
+    public int maxHealth = 20;
     public int currentHealth;
 
     public Image healthBarImage;
@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     void Start() {
         currentHealth = maxHealth;
         UpdateHealthUI();
+        Debug.Log($"Player Health: {currentHealth}/{maxHealth}");
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
@@ -33,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage) {
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
+        Debug.Log($"Player Health: {currentHealth}/{maxHealth}");
 
         UpdateHealthUI();
 

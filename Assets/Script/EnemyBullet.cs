@@ -18,9 +18,8 @@ public class EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerShip"))
         {
-            // You can add damage to player here
             Destroy(gameObject);
         }
     }

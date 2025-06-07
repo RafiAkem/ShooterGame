@@ -9,7 +9,7 @@ public class WaveSpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject bossPrefab;
 
-    public Transform enemyContainer;  // Assign this in Inspector to an empty GameObject
+    public Transform enemyContainer;
 
     public TMP_Text waveAnnouncementText;
     public float waveAnnouncementDuration = 2f;
@@ -20,6 +20,16 @@ public class WaveSpawner : MonoBehaviour
     private int currentWave = 0;
     private bool waveInProgress = false;
 
+    public AudioClip bossIncomingClip;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        currentWave = 0;
+        currentEnemies.Clear();
+        audioSource = GetComponent<AudioSource>();
+        StartCoroutine(StartWave(currentWave));
+    }
     void Update()
     {
         currentEnemies.RemoveAll(e => e == null);
@@ -107,7 +117,7 @@ public class WaveSpawner : MonoBehaviour
                 Vector3 spawnPos = new Vector3(x, y, 0f);
 
                 // GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
-                // enemy.transform.localScale = Vector3.one;
+                // enemy.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
                 // currentEnemies.Add(enemy);
             }
 
@@ -121,6 +131,12 @@ public class WaveSpawner : MonoBehaviour
         {
             waveAnnouncementText.text = "BOSS INCOMING!";
             waveAnnouncementText.gameObject.SetActive(true);
+
+        if (audioSource != null && bossIncomingClip != null)
+        {
+            audioSource.PlayOneShot(bossIncomingClip);
+        }
+
             yield return StartCoroutine(FlashText(waveAnnouncementText, 3f, 0.5f));
             waveAnnouncementText.gameObject.SetActive(false);
         }

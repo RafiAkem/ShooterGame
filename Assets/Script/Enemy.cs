@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
 
 void Shoot()
 {
-    Debug.Log("Enemy Shoot!");
+
     Instantiate(enemyBulletPrefab, firePoint.position, Quaternion.identity);
 }
 
