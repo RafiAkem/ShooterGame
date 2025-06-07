@@ -10,10 +10,14 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public float fireRate = 20.0f; // Delay between shots
     private float nextFireTime;
+
     public bool canShoot = true;
+    public bool canMove = true;  // New flag to enable/disable movement
 
     void Update()
     {
+        if (!canMove) return;  // Skip movement and shooting when disabled
+
         // Movement
         float moveX = joystick.Horizontal;
         float moveY = joystick.Vertical;
@@ -28,11 +32,11 @@ public class PlayerController : MonoBehaviour
         transform.position = Camera.main.ViewportToWorldPoint(pos);
 
         // Shooting with cooldown
-if (canShoot && Time.time >= nextFireTime)
-{
-    Shoot();
-    nextFireTime = Time.time + fireRate;
-}
+        if (canShoot && Time.time >= nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + fireRate;
+        }
     }
 
     void Shoot()
@@ -40,26 +44,21 @@ if (canShoot && Time.time >= nextFireTime)
         Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
     }
 
-void OnTriggerEnter2D(Collider2D other)
-{
-    Debug.Log("Player collided with: " + other.gameObject.name + ", tag: " + other.tag);
-
-    if (other.CompareTag("EnemyBullet"))
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit by enemy bullet!");
-
-        Destroy(other.gameObject);
-
-        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
-        if (playerHealth != null)
+        if (other.CompareTag("EnemyBullet"))
         {
-            playerHealth.TakeEnemyBulletHit();
-        }
-        else
-        {
-            Debug.LogWarning("PlayerHealth component not found on Player!");
+            Destroy(other.gameObject);
+
+            PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeEnemyBulletHit();
+            }
+            else
+            {
+                Debug.LogWarning("PlayerHealth component not found on Player!");
+            }
         }
     }
-}
-
 }

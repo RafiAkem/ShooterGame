@@ -99,6 +99,8 @@ public class Pause : MonoBehaviour
         // Memastikan game tidak dijeda saat restart
         Time.timeScale = 1f;
         Paused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Level1");
+        Player.SetActive(false);
+        Enemy.SetActive(true);
     }
 }
