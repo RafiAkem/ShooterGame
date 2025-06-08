@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Hapus using TMPro; jika Anda tidak menggunakan TextMeshPro sama sekali di script ini
-// using TMPro;
 
 public class BossController : MonoBehaviour
 {
+
+    [Header("Boss Health Settings")]
     public int maxHealth = 150;
+    public int phase2Threshold = 100;
+    public int phase3Threshold = 50;
+
     private int currentHealth;
 
     public float moveSpeed = 3f;
@@ -121,13 +124,13 @@ public class BossController : MonoBehaviour
 
     void UpdatePhase()
     {
-        if (currentHealth <= (maxHealth / 2) && currentPhase == 1) // Contoh: jika maxHealth 150, ini 75
+        if (currentHealth <= phase2Threshold && currentPhase == 1)
         {
             currentPhase = 2;
             Debug.Log("Phase 2 started!");
             StartCoroutine(TriggerExplosionsDelayed());
         }
-        else if (currentHealth <= (maxHealth / 4) && currentPhase == 2) // Contoh: jika maxHealth 150, ini 37.5
+        else if (currentHealth <= phase3Threshold && currentPhase == 2)
         {
             currentPhase = 3;
             Debug.Log("Phase 3 started!");
@@ -136,6 +139,7 @@ public class BossController : MonoBehaviour
             StartCoroutine(EnterPhase3());
         }
     }
+
 
     void Die()
     {
@@ -152,7 +156,7 @@ public class BossController : MonoBehaviour
         if (other.CompareTag("PlayerBullet"))
         {
             Destroy(other.gameObject);
-            TakeDamage(2);
+            TakeDamage(1);
         }
     }
 
@@ -386,8 +390,9 @@ public class BossController : MonoBehaviour
 
     IEnumerator BossDeathSequence()
     {
-        float explosionDuration = 6f;
+        float explosionDuration = 10f;
         float timer = 0f;
+        GameObject player = GameObject.FindGameObjectWithTag("PlayerShip");
 
        
         // Stop the boss from firing missiles
@@ -398,7 +403,14 @@ public class BossController : MonoBehaviour
             //        Destroy(child.gameObject); // Destroy any existing missiles
             //    }
             //}
-
+        if (player != null)
+        {
+            PlayerHealth health = player.GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.SetInvincibility(true); // Make player invincible
+            }
+        }
         
 
         //disappear the boss firemissile
@@ -425,7 +437,6 @@ public class BossController : MonoBehaviour
         gameObject.SetActive(false);
 
         // 4. Trigger player ship to fly away
-        GameObject player = GameObject.FindGameObjectWithTag("PlayerShip");
         if (player != null)
         {
             PlayerExit playerExit = player.GetComponent<PlayerExit>();
@@ -439,4 +450,12 @@ public class BossController : MonoBehaviour
         StopAllCoroutines();
         Destroy(gameObject);
     }
+
+    public void HandleGameOver()
+{
+    StopAllCoroutines();
+    gameObject.SetActive(false);
+    Debug.Log("Boss deactivated due to Game Over.");
+
+}
 }

@@ -18,38 +18,61 @@ public class PlayerHealth : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
-    void Start() {
+    private bool isInvincible = false;
+
+    public AudioClip loseSoundClip;
+    private AudioSource loseSoundAudioSource;
+
+    void Start()
+    {
         currentHealth = maxHealth;
         UpdateHealthUI();
         Debug.Log($"Player Health: {currentHealth}/{maxHealth}");
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
-        // Get the SpriteRenderer and store original color
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if(spriteRenderer != null)
+        if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
+
+        // Setup lose sound AudioSource
+        loseSoundAudioSource = gameObject.AddComponent<AudioSource>();
+        loseSoundAudioSource.clip = loseSoundClip;
+        loseSoundAudioSource.loop = false;
+        loseSoundAudioSource.volume = 0f;
     }
 
-    public void TakeDamage(int damage) {
+    public void SetInvincibility(bool value)
+    {
+        isInvincible = value;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (isInvincible) return;
+
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
         Debug.Log($"Player Health: {currentHealth}/{maxHealth}");
 
         UpdateHealthUI();
 
-        // Flash red when taking damage
         if (spriteRenderer != null)
             StartCoroutine(FlashRed());
 
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             Die();
         }
     }
 
-    public void TakeEnemyBulletHit() {
+    public void TakeEnemyBulletHit()
+    {
+        if (isInvincible) return;
+
         bulletHitCount++;
-        if (bulletHitCount >= hitsPerHealthLoss) {
+        if (bulletHitCount >= hitsPerHealthLoss)
+        {
             bulletHitCount = 0;
             TakeDamage(1);
         }
@@ -78,19 +101,11 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Player Dead!");
         Time.timeScale = 0f;
 
-        //hidden player object
-        gameObject.SetActive(false);
-
-
-        // Disable all enemies
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.SetActive(false);
         }
 
-        //if there's boss
-
-        // Disable all bullets
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("EnemyBullet"))
         {
             bullet.SetActive(false);
@@ -101,7 +116,6 @@ public class PlayerHealth : MonoBehaviour
             bullet.SetActive(false);
         }
 
-        // Disable player shooting and movement
         GameObject player = GameObject.FindGameObjectWithTag("PlayerShip");
         if (player != null)
         {
@@ -109,12 +123,33 @@ public class PlayerHealth : MonoBehaviour
             if (controller != null)
             {
                 controller.canShoot = false;
-                controller.enabled = false; 
+                controller.enabled = false;
             }
         }
 
-        // Show Game Over UI
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        if (boss != null)
+        {
+            BossController bossController = boss.GetComponent<BossController>();
+            if (bossController != null)
+            {
+                bossController.HandleGameOver();
+            }
+        }
+
+        WaveSpawner spawner = FindObjectOfType<WaveSpawner>();
+        if (spawner != null)
+        {
+            spawner.StopGameMusic();
+        }
+
+        // Play lose sound
+        SoundManager.Instance.PlayLoseSound();
+
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
+
+        // Disable player GameObject last
+        gameObject.SetActive(false);
     }
 }

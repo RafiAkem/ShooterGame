@@ -20,90 +20,55 @@ public class Pause : MonoBehaviour
         SettingsMenuCanvas.SetActive(false);
     }
 
-    // Metode Update tidak lagi mendeteksi tombol Escape.
-    // Sekarang, kamu akan memanggil TogglePause() dari tombol UI.
     void Update()
     {
-        // Kode ini sudah tidak diperlukan karena kita akan menggunakan tombol UI.
-        // if (Input.GetKeyDown(KeyCode.Escape))
-        // {
-        //     if (Paused)
-        //     {
-        //         Play();
-        //     }
-        //     else
-        //     {
-        //         Stop();
-        //     }
-        // }
+        // Pause is now toggled via UI button, not by Escape key
     }
 
     public void Play()
     {
-        GameObject[] playerBullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-        foreach (GameObject bullet in playerBullets)
-        {
-            bullet.SetActive(true);
-        }
-        foreach (GameObject bullet in enemyBullets)
-        {
-            bullet.SetActive(true);
-        }
-
         PauseMenuCanvas.SetActive(false);
-        SettingsMenuCanvas.SetActive(false); // Sembunyikan menu pengaturan saat melanjutkan
+        SettingsMenuCanvas.SetActive(false);
         Player.SetActive(true);
         Enemy.SetActive(true);
-        UI.SetActive(true); // Tampilkan UI saat melanjutkan game
-        Clone.SetActive(true);
+        UI.SetActive(true);
+        if (Clone != null) Clone.SetActive(true);
+
+        SetBulletVisibility(true); // Show bullets again
+
         Time.timeScale = 1f;
         Paused = false;
     }
 
     void Stop()
     {
-        GameObject[] playerBullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-        foreach (GameObject bullet in playerBullets)
-        {
-            bullet.SetActive(false);
-        }
-        foreach (GameObject bullet in enemyBullets)
-        {
-            bullet.SetActive(false);
-        }
-
-
         PauseMenuCanvas.SetActive(true);
-        SettingsMenuCanvas.SetActive(false); // Pastikan menu pengaturan tersembunyi saat menjeda
+        SettingsMenuCanvas.SetActive(false);
         Player.SetActive(false);
         Enemy.SetActive(false);
-        UI.SetActive(false); // Sembunyikan UI saat game dijeda
-        if (Clone != null)
-        {
-            Clone.SetActive(false); // Pastikan Clone juga dinonaktifkan saat menjeda
-        }
+        UI.SetActive(false);
+        if (Clone != null) Clone.SetActive(false);
+
+        SetBulletVisibility(false); // Hide bullets visually
+
         Time.timeScale = 0f;
         Paused = true;
     }
 
-    // Ini adalah metode baru yang akan kamu panggil dari tombol jeda UI.
     public void TogglePause()
     {
         if (Paused)
         {
-            Play(); // Jika sedang dijeda, lanjutkan game
+            Play();
         }
         else
         {
-            Stop(); // Jika tidak dijeda, jeda game
+            Stop();
         }
     }
 
     public void MainMenuButton()
     {
-        // Memastikan game tidak dijeda saat kembali ke menu utama
         Time.timeScale = 1f;
         Paused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
@@ -111,19 +76,36 @@ public class Pause : MonoBehaviour
 
     public void ExitButon()
     {
-        // game pindah ke halaman SelectingLevel
-        Time.timeScale = 1f; // Pastikan game tidak dijeda saat keluar
+        Time.timeScale = 1f;
         Paused = false;
         SceneManager.LoadScene("SelectingLevel");
     }
 
     public void restart()
     {
-        // Memastikan game tidak dijeda saat restart
         Time.timeScale = 1f;
         Paused = false;
         SceneManager.LoadScene("Level1");
         Player.SetActive(false);
         Enemy.SetActive(true);
+    }
+
+    // Helper to show/hide bullets visually (not deactivate them)
+    void SetBulletVisibility(bool visible)
+    {
+        GameObject[] playerBullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+
+        foreach (GameObject bullet in playerBullets)
+        {
+            SpriteRenderer sr = bullet.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = visible;
+        }
+
+        foreach (GameObject bullet in enemyBullets)
+        {
+            SpriteRenderer sr = bullet.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = visible;
+        }
     }
 }

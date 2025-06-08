@@ -749,6 +749,37 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &2100741388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2098784406641390768, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+  m_PrefabInstance: {fileID: 5608412871420669810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2100741389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100741388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2125185ff9c80804c9b2a4c3467d29b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 2100741391}
+  soundOnSprite: {fileID: 21300000, guid: 38e4ef6b8eff15e44944d2f19b0ba5f3, type: 3}
+  soundOffSprite: {fileID: 21300000, guid: e3d5cba9b5c31604badf547c3fe3fb3a, type: 3}
+--- !u!114 &2100741391 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1131076808786752322, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+  m_PrefabInstance: {fileID: 5608412871420669810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100741388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2144163535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -912,6 +943,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2100741389}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMute
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SoundToggleButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157916822213920190, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4969779990210698146, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -996,7 +1055,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 8847228086831738283, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2098784406641390768, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2100741389}
   m_SourcePrefab: {fileID: 100100000, guid: 975777b646abcf44fa4b8491a8784384, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

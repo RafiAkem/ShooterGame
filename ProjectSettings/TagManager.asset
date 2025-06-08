@@ -8,6 +8,8 @@ TagManager:
   - EnemyBullet
   - Enemy
   - PlayerShip
+  - Boss
+  - LobbyMusic
   layers:
   - Default
   - TransparentFX

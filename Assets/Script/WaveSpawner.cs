@@ -26,11 +26,14 @@ public class WaveSpawner : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip normalWaveMusicClip;
     public AudioClip bossFightMusicClip;
-
     private AudioSource musicAudioSource;
+    public AudioClip loseSoundClip; 
+    private AudioSource loseSoundAudioSource; 
 
     void Start()
     {
+        StopLobbyMusic();
+
         //StageCompleteUI.SetActive(false);
         if (StageCompleteUI != null) { 
         StageCompleteUI.SetActive(false);
@@ -50,6 +53,12 @@ public class WaveSpawner : MonoBehaviour
     }
 
         StartCoroutine(StartWave(currentWave));
+
+        //Lose Sound
+        loseSoundAudioSource = gameObject.AddComponent<AudioSource>();
+        loseSoundAudioSource.clip = loseSoundClip;
+        loseSoundAudioSource.loop = false;
+        loseSoundAudioSource.volume = 0f;
     }
     void Update()
     {
@@ -213,4 +222,45 @@ public class WaveSpawner : MonoBehaviour
             yield return null;
         }
     }
+
+//SOUND FUNCTIONS
+    void StopLobbyMusic()
+{
+    GameObject lobbyMusic = GameObject.FindGameObjectWithTag("LobbyMusic");
+    if (lobbyMusic != null)
+    {
+        Destroy(lobbyMusic);
+    }
+}
+
+public void StopGameMusic()
+{
+    if (musicAudioSource != null)
+    {
+        musicAudioSource.Stop();
+    }
+}
+
+public IEnumerator PlayLoseSoundFadeIn(float fadeDuration = 2f)
+{
+    if (loseSoundClip == null) yield break;
+
+    loseSoundAudioSource.volume = 0f;
+    loseSoundAudioSource.Play();
+
+    float timer = 0f;
+    while (timer < fadeDuration)
+    {
+        timer += Time.deltaTime;
+        loseSoundAudioSource.volume = Mathf.Lerp(0f, 1f, timer / fadeDuration);
+        yield return null;
+    }
+    loseSoundAudioSource.volume = 1f;
+}
+
+public void TriggerLoseSound()
+{
+    StartCoroutine(PlayLoseSoundFadeIn(2f));
+}
+
 }
