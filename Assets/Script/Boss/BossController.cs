@@ -156,7 +156,7 @@ public class BossController : MonoBehaviour
         if (other.CompareTag("PlayerBullet"))
         {
             Destroy(other.gameObject);
-            TakeDamage(1);
+            TakeDamage(2);
         }
     }
 
