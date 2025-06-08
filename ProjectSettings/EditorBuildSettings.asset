@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/SelectingLevel.unity
-    guid: 58b56ed5792362648bd21e494b35c867
-  - enabled: 1
     path: Assets/Scenes/Setting.unity
     guid: c6bd865e497b57e4fbc8e503d7a14334
   - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: 5a829df683cd31c498aca693386e3502
+  - enabled: 1
+    path: Assets/Scenes/SelectingLevel.unity
+    guid: 58b56ed5792362648bd21e494b35c867
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 7a7e1b4805325214bac3a9848fdeb4c4
