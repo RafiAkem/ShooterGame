@@ -7,43 +7,42 @@ public class SoundToggleButton : MonoBehaviour
     public Sprite soundOnSprite;
     public Sprite soundOffSprite;
 
+    private const string MutePrefKey = "SoundMuted";
+
     private void Start()
     {
-        if (SoundManager.Instance != null)
-        {
-            UpdateButtonImage();
-        }
-        else
-        {
-            Debug.LogError("SoundManager tidak ditemukan di scene!");
-        }
+        // Load saved mute state and apply it
+        bool isMuted = PlayerPrefs.GetInt(MutePrefKey, 0) == 1;
+        AudioListener.pause = isMuted;
+
+        UpdateButtonImage();
     }
 
     public void ToggleMute()
     {
-        if (SoundManager.Instance != null)
-        {
-            bool newMuteState = !SoundManager.Instance.IsMuted();
-            SoundManager.Instance.SetMute(newMuteState);
-            UpdateButtonImage();
-            Debug.Log("Sound muted: " + newMuteState);
-        }
-        else
-        {
-            Debug.LogError("SoundManager.Instance masih null saat ToggleMute dipanggil.");
-        }
+        bool isMuted = !AudioListener.pause;
+
+        // Apply new mute state
+        AudioListener.pause = isMuted;
+
+        // Save to PlayerPrefs
+        PlayerPrefs.SetInt(MutePrefKey, isMuted ? 1 : 0);
+        PlayerPrefs.Save();
+
+        UpdateButtonImage();
+
+        Debug.Log("Sound muted: " + isMuted);
     }
 
     private void UpdateButtonImage()
     {
-        if (buttonImage != null && SoundManager.Instance != null)
+        if (buttonImage != null)
         {
-            bool isMuted = SoundManager.Instance.IsMuted();
+            bool isMuted = AudioListener.pause;
             buttonImage.sprite = isMuted ? soundOffSprite : soundOnSprite;
         }
     }
 
-    // Opsional: jika ingin update gambar setiap kali toggle muncul lagi
     private void OnEnable()
     {
         UpdateButtonImage();
